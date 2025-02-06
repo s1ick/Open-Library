@@ -1,55 +1,69 @@
 <div class="book-dialog">
-  <div class="book-dialog__header book-dialog-header">
-    <div
-      class="book-dialog-header__title book-dialog-header-title"
-      mat-dialog-title
-    >
-      <!-- TITLE books -->
-      {{ data.title }}
-    </div>
-    <div class="close-container" mat-dialog-close>
-      <div class="leftright"></div>
-      <div class="rightleft"></div>
-    </div>
+  <div class="dialog-header">
+    <h2 mat-dialog-title>{{ bookData()?.title }}</h2>
+    <button mat-icon-button mat-dialog-close aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  <mat-dialog-content>
-    <div class="book-dialog-content">
-      <div class="book-dialog-content-wrapper">
-        <div class="book-dialog-content-img" *ngIf="data.isbn">
-          <img
-            [src]="pathImg + 'b/' + 'isbn/' + data.isbn[0] + '-L.jpg'"
-            alt=""
-          />
-        </div>
 
-        <div class="book-dialog-content-text">
-          <div *ngIf="data.author_name">
-            <b>Author:</b>{{ data.author_name }}
-          </div>
-          <div class="book-dialog-content-text__item" *ngIf="data.publish_year">
-            <b>Publication date:</b>{{ data.publish_year }}
-          </div>
-          <div class="book-dialog-content-text__item" *ngIf="data.isbn">
-            <b>ISBN:</b>{{ data.isbn }}
-          </div>
+  <mat-dialog-content class="dialog-content">
+    <div class="book-layout">
 
-          <!-- <div class="book-dialog-content-text__item">
-            <b>Author:</b>TOLKIEN
-          </div>
-          <div class="book-dialog-content-text__item">
-            <b>Publication date:</b>DATA
-          </div>
-          <div class="book-dialog-content-text__item"><b>ISBN:</b>123456</div> -->
-        </div>
+      <!-- Book Cover -->
+      <div class="book-cover-section">
+        <img
+          [src]="getCoverUrl()"
+          [alt]="bookData()?.title"
+          class="book-cover-large"
+        />
       </div>
-      <div class="book-dialog-content-footer" *ngIf="false">
-        <mat-dialog-actions>
-          <button class="btn" mat-dialog-close>
-            <span class="noselect">Close</span>
-            <div class="circle"></div>
-          </button>
-        </mat-dialog-actions>
+
+      <!-- Book Details -->
+      <div class="book-details">
+        <div class="detail-item">
+          <strong>Author(s):</strong>
+          <span>{{ getAuthors() }}</span>
+        </div>
+
+        <div class="detail-item">
+          <strong>First Published:</strong>
+          <span>{{ getFirstPublishYear() }}</span>
+        </div>
+
+        <div class="detail-item">
+          <strong>ISBN:</strong>
+          <span>{{ getISBN() }}</span>
+        </div>
+
+        <!-- Subjects -->
+        @if (hasSubjects()) {
+          <div class="detail-item">
+            <strong>Subjects:</strong>
+            <div class="subjects-list">
+              @for (subject of getSubjects(); track subject) {
+                <span class="subject-tag">{{ subject }}</span>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Additional book data can be added here -->
+        @if (bookData()?.publisher) {
+          <div class="detail-item">
+            <strong>Publisher:</strong>
+            <span>{{ bookData()?.publisher[0] }}</span>
+          </div>
+        }
+
       </div>
     </div>
   </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" (click)="addToFavorites()">
+      <mat-icon>favorite</mat-icon>
+      Add to Favorites
+    </button>
+  </mat-dialog-actions>
 </div>

@@ -1,12 +1,22 @@
 <div class="header">
   <mat-form-field class="example-full-width">
-    <mat-label>Search books (set author)</mat-label>
+    <mat-label>Search books by author</mat-label>
     <input
       #input
       [(ngModel)]="author"
       matInput
-      placeholder="Search books"
-      [value]="author"
     />
+
+    <mat-icon matSuffix>search</mat-icon>
+
+    <button
+      *ngIf="author()"
+      matSuffix
+      mat-icon-button
+      (click)="clearSearch()"
+      aria-label="Clear search"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
 </div>

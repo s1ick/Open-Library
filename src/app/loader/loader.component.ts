@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-loader',
+  standalone: true,
+  imports: [CommonModule, NgxSkeletonLoaderModule],
   templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.less'],
 })
-export class LoaderComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class LoaderComponent {}

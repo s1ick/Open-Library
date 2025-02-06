@@ -1,7 +1,14 @@
-<div class="no-data">
-  <div class="no-data__title">
-    <b>{{ title }}</b>
+<div class="no-data-container">
+  <div class="no-data-image">
+    <img
+      [src]="getImageUrl()"
+      [alt]="title"
+      (error)="onImageError($event)"
+    />
   </div>
-  <div class="no-data__text">{{ subTitle }}</div>
-  <img src="{{ imagePath }}/{{ imgName }}.svg" />
+
+  <div class="no-data-content">
+    <h3 class="no-data-title">{{ title }}</h3>
+    <p class="no-data-subtitle">{{ subTitle }}</p>
+  </div>
 </div>
