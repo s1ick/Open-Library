@@ -1,10 +1,16 @@
-import { Component, ElementRef, ViewChild, signal, inject, computed } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  signal,
+  inject,
+  computed,
+} from '@angular/core';
 import { ItemBookComponent } from '../item-book/item-book.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BooksService } from '../books.service';
 import { NoDataComponent } from '../no-data/no-data.component';
 import { LoaderComponent } from '../loader/loader.component';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -16,9 +22,8 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     NoDataComponent,
     LoaderComponent,
-    NgScrollbarModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
   ],
   templateUrl: './list-books.component.html',
   styleUrls: ['./list-books.component.scss'],
@@ -46,7 +51,8 @@ export class ListBooksComponent {
   onImageLoad(event: Event): void {
     const target = event.target as HTMLImageElement;
     if (target && target.naturalHeight === 1) {
-      target.src = 'https://blog.breastmates.co.nz/wp-content/uploads/2019/08/placeholder-images-image_large.png';
+      target.src =
+        'https://blog.breastmates.co.nz/wp-content/uploads/2019/08/placeholder-images-image_large.png';
     }
   }
 

@@ -1,43 +1,39 @@
-<ng-scrollbar>
-  <div class="container">
+<div class="container">
+  <!-- Loading State -->
+  @if (isLoading()) { }
 
-    <!-- Loading State -->
-    @if (isLoading()) {
-      <app-loader></app-loader>
-    }
+  <!-- No Data State -->
+  @else if (!hasBooks() && !isLoading()) {
+  <app-no-data></app-no-data>
+  }
 
-    <!-- No Data State -->
-    @else if (!hasBooks() && !isLoading()) {
-      <app-no-data></app-no-data>
-    }
-
-    <!-- Books Grid -->
-    @else if (hasBooks()) {
-      <div class="books-header">
-        <h2>Found {{ bookCount() }} books</h2>
-      </div>
-
-      <div class="books-grid">
-        @for (book of books(); track book.key) {
-          <mat-card class="book-card" (click)="openDialog(book)">
-            <div class="card-image">
-              <img
-                [src]="getCoverUrl(book)"
-                [alt]="book.title"
-                (load)="onImageLoad($event)"
-                class="book-cover"
-              />
-            </div>
-
-            <mat-card-content class="card-content">
-              <h3 class="book-title">{{ book.title }}</h3>
-              <p class="book-author">{{ getAuthors(book) }}</p>
-              <p class="book-year">First published: {{ getFirstPublishYear(book) }}</p>
-            </mat-card-content>
-          </mat-card>
-        }
-      </div>
-    }
-
+  <!-- Books Grid -->
+  @else if (hasBooks()) {
+  <div class="books-header">
+    <h2>Found {{ bookCount() }} books</h2>
   </div>
-</ng-scrollbar>
+
+  <div class="books-grid">
+    @for (book of books(); track book.key) {
+    <mat-card class="book-card" (click)="openDialog(book)">
+      <div class="card-image">
+        <img
+          [src]="getCoverUrl(book)"
+          [alt]="book.title"
+          (load)="onImageLoad($event)"
+          class="book-cover"
+        />
+      </div>
+
+      <mat-card-content class="card-content">
+        <h3 class="book-title">{{ book.title }}</h3>
+        <p class="book-author">{{ getAuthors(book) }}</p>
+        <p class="book-year">
+          First published: {{ getFirstPublishYear(book) }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+  }
+</div>

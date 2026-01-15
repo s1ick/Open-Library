@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@use 'scss-reset';
-
+@use "scss-reset" as *;
 /* CSS Custom Properties for theming */
 :root {
   --primary-color: #1976d2;
@@ -45,7 +44,8 @@
 }
 
 /* Base styles */
-html, body {
+html,
+body {
   height: 100%;
   scroll-behavior: smooth;
 }
@@ -116,7 +116,8 @@ body {
     text-shadow: none !important;
   }
 
-  a, a:visited {
+  a,
+  a:visited {
     text-decoration: underline;
   }
 }
